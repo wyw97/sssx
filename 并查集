@@ -1,0 +1,15 @@
+//并查集
+int parent[N]
+int GetRoot(int a)
+{
+    if(parent[a]1=a)
+        parent[a]=GetRoot(parent[a])
+    return parent[a];
+}
+int Merge(int a,int b){
+    parent[GetRoot(b)]=GetRoot(a);
+    //注意是找到a和b的根结点;
+}
+bool Query(int a,int b){
+    return GetRoot(a)==GetRoot(b);
+}

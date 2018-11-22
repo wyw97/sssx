@@ -1,0 +1,29 @@
+/*
+  C[i]=\Sigma_(t=i-lowbit(i)+1)^i a[t]
+  i下标从1开始
+  树状数组用于解决单个元素经常修改，而且还反复求不同区间和的情况。
+*/
+
+int lowbit(int x)
+{
+  return x & (-x);
+  //x的二进制表示形式留下最右边的1，其他位都变成0
+}
+
+如何在logN 时间完成求和sum(k)
+C[i] = a[i - lowbit(i) + 1] + ... + a[i]
+sum(k)=C[n1]+C[n2]+...+C[nm]
+其中 n_m = k，n_(i-1)=n_i - lowbit(n_i)
+n_1 > 0 && n_1 - lowbit(n_1) = 0
+
+
+更新单个a[i]元素时，有且只有以下几项需要更新
+C[n1],C[n2],...C[n_m]
+其中，n1 = i, n_(p+1) = n_p + lowbit(n_p)
+n_m <= N && n_m + lowbit(n_m) > N
+
+初始化构建树状数组C的时间复杂度是O（N）
+C[k] = sum(k) - sum(k - lowbit(k))
+
+二维树状数组差不太多
+

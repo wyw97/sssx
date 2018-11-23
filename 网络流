@@ -2,6 +2,69 @@
 
 ford-fulkerson算法：
 
-残余网络：网络流图上，找到一条源到汇的路径后，对路径上所有的边，其容量都减去此次找到的流量，对
+残余网络：网络流图上，找到一条源到汇的路径后，对路径上所有的边，其容量都减去
+此次找到的流量，对路径上所有的边，都添加一条反向边，其容量也等于此次找到的流
+量，这样得到的新图，就称为原图的“残余网络”。
 
-路径上所有的边，都添加一条反向边，其容量也等于此次找到的流量，这样得到的新图，就称为原图的“残余网络”
+Edmonds-karp算法：
+在每次增广的时候，选择从源到汇的具有最少边数的增广路径,即不是通过dfs寻找增广路径，而是通过bfs寻找增广路径。
+
+Karp算法模版；
+const int maxn = 300;//点数
+int G[maxn][maxn];//二维图
+int Prev[maxn];//前驱节点
+bool visited[300];//是否访问过
+int n,m;//n 顶点数，m汇点
+int Algorithm()
+{
+  int v,i;
+  deque<int> q;
+  memset(Prev,0,sizeof(Prev));
+  memset(visited,0,sizeof(visited));
+  Prev[1] = 0;
+  q.push_back(1)
+  bool bFindPath = false;
+  while(!q.empty()){
+    v = q.front();
+    q.pop_front();
+    for(int i = 1; i <= m; i++){
+      if(G[v][i] > 0 && Visited[i] = 0){
+          Prev[i] = v;
+          Visited[i] = 1;
+          if(i == m){
+            bFindPath = true;
+            q.clear();
+            break;
+          }
+          else q.push_back(i);
+      }
+    }
+    
+  }
+  if(!bFindPath) return 0;
+  int nMinFlow = 99999999;
+  v = m;
+  while(Prev[v]){
+    nMinFlow = min(nMinFlow, G[Prev[v]][v]);
+    v = Prev[v];
+  }
+  v = m;
+  while(Prev[v]){
+    G[Prev[v]][v] -= nMinFlow;
+    G[v][Prev[v]] += nMinFlow;
+    v = Prev[v];
+  }
+  return nMinFlow;
+}
+int main()
+{
+  int tot_ans = 0;
+  while(aug = Algorithm()){
+    tot_ans += aug;
+  }
+  return 0;
+}
+
+
+Dinic 快速网络流算法
+

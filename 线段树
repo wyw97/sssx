@@ -1,0 +1,33 @@
+线段树：
+本质上是区间的分解。
+
+建树阶段：
+void BuildTree（int root, int L, int R)
+{
+  tree[root].L = L;
+  tree[root].R = R;
+  if( L != R){
+    int mid = (L + R)/2;
+    BuildTree(root * 2 + 1, L, mid);
+    BuildTree(root * 2 + 2, mid + 1, R);
+  }
+}
+
+查询数据阶段：
+void Query(int root, int s, int e){
+  if(tree[root].l == s && tree[root].r == e){
+            //f();执行某个功能;
+    return;//别忘记返回;
+  }
+  if(e <= tree[root].mid){
+    Query(root * 2 + 1, s, e);
+  }
+  else if(s > tree[root].mid){
+    Query(root * 2 + 2, s, e);
+  }
+  else{
+    Query(root * 2 + 1, s, mid);
+    Query(root * 2 + 2, mid + 1, e);
+  }
+}
+

@@ -17,6 +17,9 @@
        
        nlogn 求最长上升子序列
        
+3、线段树 ：区间更新、区间查询
+
+       
 7、网络流
 
       poj 1273 Drainage Ditches

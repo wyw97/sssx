@@ -13,6 +13,8 @@
 
        poj 3321 Apple Tree
        
+       poj 1195 Mobile Phones
+       
 7、网络流
 
       poj 1273 Drainage Ditches

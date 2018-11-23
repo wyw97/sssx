@@ -15,6 +15,8 @@
        
        poj 1195 Mobile Phones
        
+       nlogn 求最长上升子序列
+       
 7、网络流
 
       poj 1273 Drainage Ditches

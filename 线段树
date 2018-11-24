@@ -13,7 +13,7 @@ void BuildTree（int root, int L, int R)
   }
 }
 
-查询数据阶段：
+单点查询数据阶段：
 void Query(int root, int s, int e){
   if(tree[root].l == s && tree[root].r == e){
             //f();执行某个功能;
@@ -30,4 +30,53 @@ void Query(int root, int s, int e){
     Query(root * 2 + 2, mid + 1, e);
   }
 }
+
+区间更新 做标记 延迟更新
+void Add(CNode* pRoot, int a, int b, long long c){
+  if(pRoot->L == a && pRoot->R == b){
+      pRoot->inc += c;
+      return;
+  }
+  pRoot->sum += c * (b - a + 1);
+  int mid = (pRoot->L + pRoot->R)/2;
+  if(b <= mid){
+    Add(pRoot->pLeft, a, b, c);
+  }
+  else if(a > mid){
+    Add(pRoot->pRight, a, b, c);
+  }
+  else{
+    Add(pRoot->pLeft, a, mid, c);
+    Add(pRoot->pRight, mid + 1, b, c);
+  }
+
+}
+
+区间查询[a,b]
+long long QuerySum(CNode* pRoot, int a, int b)
+{
+    if(pRoot->L == a && pRoot->R == b){
+        return pRoot->sum + (b - a + 1)*pRoot->inc;
+    }
+    pRoot->sum += (pRoot->R - pRoot->L + 1)*pRoot->inc
+    pRoot->pLeft->inc += pRoot->inc; 
+    pRoot->pRight->inc += pRoot->inc; 
+    pRoot->inc = 0;
+    if( b <= pRoot->Mid())
+        return Querysum(pRoot->pLeft,a,b);
+    else if( a >= pRoot->Mid() + 1)
+        return Querysum(pRoot->pRight,a,b);
+    else {
+        return Querysum(pRoot->pLeft,a,pRoot->Mid()) +
+               Querysum(pRoot->pRight, pRoot->Mid() + 1, b);
+     }
+
+}
+
+
+
+
+
+
+
 

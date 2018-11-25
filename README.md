@@ -22,6 +22,8 @@
       poj 3264 Balanced Lineup
 
       poj 3468 A Simple Problem with Integers(模板题)
+      
+      poj 2528 Mayor's posters
        
 7、网络流
 

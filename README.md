@@ -33,4 +33,4 @@
        
       poj 2112 Optimal Milking
       
-      poj 1274 The Perfect Stall
+      poj 1274 The Perfect Stall（二部图匹配模板题）

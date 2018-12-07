@@ -24,6 +24,9 @@
       poj 3468 A Simple Problem with Integers(模板题)
       
       poj 2528 Mayor's posters
+      
+4、Trie图：多模式的字符串匹配
+
        
 7、网络流
 

@@ -66,6 +66,35 @@
  
  }
  
+Trie树（字典树，单词前缀树）
+由若干模式串构建而成
+struct trienode{
+	trienode* child[26];
+	trienode(){
+		memset(child, 0, sizeof(child));
+	}
+}
  
- 
+void build(string s, trienode* root){
+	trienode* p = root;
+	int len_s = s.size();
+	for(int i = 0; i < len_s; i++){
+		if(p->child[s[i]-'a'] == NULL){
+			p->child[s[i]-'a'] = new trienode();
+		}
+		p = p->child[s[i]-'a'];
+	}
+}
+
+Trie图（AC自动机、DFA)        
+对于插入的每个模式串，其插入过程中使用的最后一个节点称为终止节点
+
+关键：记录哪个模式已经被匹配
+
+前缀指针 和kmp中的next数组相类似
+
+
+
+
+	
  

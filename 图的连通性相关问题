@@ -1,0 +1,52 @@
+拓扑排序
+有向强连通分支
+
+有向图强连通分支的Tarjan算法
+void Tarjan(u){
+  dfn[u] = low[u] = ++index;
+  stack.push(u)
+  for each(u,v) in E{//E is the set of edges
+    if(v is not visited){
+        Tarjan(v);
+        low[u] = min(low[u], low[v])
+    
+    }
+    else if(v in 当前搜索路径){//
+      low[u] = min(low[u], dfn[v])
+    
+    }
+    
+  }
+  if(dfn[u] == low[u]){//u是一个强连通分量的根
+    repeat
+      v = stack.pop()
+      print v
+     until (u == v)
+  
+  }
+
+}
+
+
+无向连通图求割点和桥的Tarjan算法
+void Tarjan(u){
+  dfn[u] = low[u] = ++index;
+ 
+  for each(u,v) in E{//E is the set of edges
+    if(v is not visited){
+        Tarjan(v);
+        low[u] = min(low[u], low[v])
+        dfn[u] < low[v] <=> (u,v) 是桥
+    }
+    else if(v不是u的父节点){//
+      low[u] = min(low[u], dfn[v])
+    
+    }
+    
+  }
+  if(u is root)
+    u是割点 <=> u在搜索树上至少两个子节点
+  else  
+    u是割点 <=> u有一个子节点v满足dfn[u] <= low[v]
+
+}

@@ -1,0 +1,71 @@
+ Trie图的作用：多模式串的字符串匹配
+ 
+ 首先，kmp的模板如下所示：
+ 特征数
+ next[i] = {
+ 1. -1 ( i = 0)
+ 2. max{k:0 < k < i && P(0,...,k-1) = P(i-k, ..., i-1)},if k exists
+ 3. 0 else
+ }
+ 特征向量N 非优化算法
+ //p is the pattern string
+ //next数组为所求:最长的能够与前缀子串匹配的左子串
+ void FindNext()
+ {
+ 		int i, k;
+		int m = P.length();
+		next[0] = -1;
+		i = 0;
+		k = -1;
+		while(i < m - 1){
+			while(k >= 0 && P[k] != P[i]){
+				k = next[k];
+			}
+				i++;
+				k++;
+				next[i] = k;
+			
+		}
+ }
+ 
+ //优化版本
+ void FindNext()
+ {
+ 		int i, k;
+		int m = P.length();
+		next[0] = -1;
+		i = 0;
+		k = -1;
+		while(i < m - 1){
+			while(k >= 0 && P[k] != P[i]){
+				k = next[k];
+			i++;
+			k++;
+			if(P[k] == P[i])
+				next[i] = next[k];//优化步骤
+			else
+				next[i] = k;
+			
+		}
+ }
+ 
+ //KMP algorithm
+ int KMPStrMatching(string T, string P, int* Next)
+ {
+ 		int i = 0, j = 0;//i是目标的下标变量， j是模式的下标变量;
+		int pLen = P.length(), tLen = T.length();//pattern; target
+		if(tLen < pLen) return -1;//目标比模式短，肯定失配
+		while(j < plen && i < tlen){
+				if(j == -1 || T[i] == P[j])
+						i++, j++;
+				else j = Next[j]
+		
+		}
+		if(j >= pLen) return i - pLen;
+		else return -1;
+ 
+ }
+ 
+ 
+ 
+ 

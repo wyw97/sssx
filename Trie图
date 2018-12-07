@@ -93,7 +93,78 @@ Trie图（AC自动机、DFA)
 
 前缀指针 和kmp中的next数组相类似
 
+注意危险节点
+终止节点是危险节点
+如果一个节点的前缀指针指向危险节点，则它也是危险节点
 
+多模式串字符串匹配 模板
+struct CNode{
+	CNode* pChilds[26];
+	CNode* pPrev;//前缀指针
+	bool bBadNode;//是否是危险节点
+	CNode(){
+		memset(pChild, 0, sizeof(pChild));
+		bBadNode = false;
+		pPrev = NULL;
+	}
+}
+CNode Tree[20000];
+
+//将模式串插入trie树,pRoot = Tree + 1,与后面统一;
+void Insert(CNode* pRoot, char* s)
+{
+	for(int i = 0; s[i]; i++){
+		if(pRoot->pChilds[s[i]-'a'] == NULL){
+			pRoot->pChilds[s[i]-'a'] = Tree + nNodesCount;
+			nNodesCount ++;
+		}
+		pRoot = pRoot->pChilds[s[i]-'a'];
+	}
+	pRoot->bBadNode = true;
+}
+
+//在trie树上加入前缀指针
+void BuildDfa()
+{
+    for(int i = 0; i < 26; i++)
+    	Tree[0].pChilds[i] = Tree + 1;
+    Tree[0].pPrev = NULL;
+    Tree[1].pPrev = Tree;
+    deque<CNode* >q;
+    q.push_back(Tree + 1);
+    
+    while(!q.empty()){
+    	CNode* pRoot = q.front();
+	q.pop_front();
+	for(int i = 0; i < 26; i++){
+		CNode * p = pRoot->pChild[i];
+		if(p){
+			CNode* pPrev = pRoot->pPrev;
+			while(pPrev->pChilds[i] == NULL)
+				pPrev = pPrev->pPrev;
+			p->pPrev = pPrev->pChilds[i];
+			if(p->pPrev->bBadNode)
+				p->bBadNode = true;
+			q.push_back(p);
+		}
+	}
+    }
+    
+}
+
+bool SearchDfa(char* s)
+{
+	CNode* p = Tree + 1;
+	for(int i = 0; s[i]; i++){
+		while(p->pChilds[s[i]-'a'] == NULL)
+			p = p->pPrev;
+		p = p->pChilds[s[i]-'a'];
+		if(p->bBadNode)
+			return true;
+	}
+	return false;
+	
+}
 
 
 	

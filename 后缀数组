@@ -1,0 +1,77 @@
+后缀数组的概念
+长度为n的字符串S，有n个后缀，对n个后缀排序，有名次0——n-1，
+定义：sa[i]表示名次为i的后缀在S中的起始位置（即起始下标）
+
+笨办法 n^2logn 略
+
+j-后缀
+对字符串S的每个后缀，取左边j个字符（长度不足则全取）
+j-后缀的排名：可并列，pm^j[i]：位置为i的j-后缀的排名
+j-后缀的名次：不可并列，相同的j-后缀，位置靠左的名次在前，
+
+倍增法求后缀数组
+每轮做基数排序，时间复杂度为nlog
+若每轮做快速排序，则时间复杂度为n(logn)^2
+
+/*
+求Sa数组模板先略。。。实在看不懂
+
+*/
+
+应用：
+得到Sa数组以后，希望O(1)时间求位置i的后缀的名次。
+构造rank数组即可。
+for(int i = 0; i < n; i++)
+{
+  Rank[sa[i]] = i;
+}
+
+
+最长公共前缀LCP
+对给定长为n的字符串，希望经过复杂度O(nlogn) 的预处理后，任给2个后缀，都能在O(1)时间内求得这2个后缀的最长公共前缀的长度。
+
+预处理：
+在O(nlogn)求得后缀数组sa后，可以在O(n)时间求得一个最长公共前缀数组height
+height[0] = 0
+height[i] = LPCL(i-1, i) 0 < i <= n-1
+height[i]是名次为i和名次为i-1的后缀的LCPL
+
+H数组：
+H[i] = LCPL(Suffix(i), Suffix(sa[Rank[i] - 1]))
+H[i]是位置i的后缀X，和名次在X前一位的后缀Y的LCPL
+
+则
+for(int i = 0; i < n; i++)
+  height[i] = H[sa[i]];
+or
+for(int i = 0; i < n; i++)
+  height[Rank[i]] = H[i];
+  
+关于H数组的定理：证明略
+H[i] >= H[i-1] -1 (if i > 0 && Rank[i] > 0)
+
+求H数组
+1）求H[0]
+   硬比较Suffix(0)和Suffix(sa[Rank[0]-1), O(n)
+   
+2) 依次求H[1],...,H[n-1]
+
+求height的实现
+void BuildHeight(char* str, int n,int* sa, int* Rank)
+{
+  int i,j,k;
+  for(int i = 0; i < n; ++i)
+      Rank[sa[i] = i;
+  for(i = k = 0; i < n; height[Rank[i++]]=k){
+      for(k?k--:0, j = sa[Rank[i]-1];str[i+k]==str[j+k];k++);
+  }
+}
+这里要求Rank[0]>0，所以在实际处理的时候字符串长度+1，最后一位是'\0'
+
+
+
+
+
+
+
+

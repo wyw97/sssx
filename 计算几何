@@ -1,0 +1,40 @@
+class CVector{
+  double x, y;
+};
+CVector operator + (CVector p, CVector q){
+    return CVector(p.x + q.x, p.y + q.y);
+}//p + q
+CVector operator - (CVector p, CVector q){
+    return CVector(p.x - q.x, p.y - q.y);
+}//p - q
+CVector operator * (CVector p, double k){
+    return CVector(p.x * k, p.y * k);
+}//p * k
+double operator * (CVector p, CVector q){
+  return p.x * q.x + p.y * q.y;
+}//p * q
+double length(CVector p){
+  return math.sqrt(p*p);
+}
+CVector unit(CVector p){
+  return 1 / length(p) * p;
+}
+double project(CVector p, CVector n) { 
+  return dot(p, unit(n)); //点积
+}
+double dot(CVector p, CVector q) {
+     return p.x*q.x+p.y*q.y;
+}
+double operator ^(CVector p, CVector q) {
+  return p.x * q.y – q.x * p.y;
+}//叉积
+
+//两个矢量所围成的三角形面积
+double area(cVector p, CVector q){
+  return p ^ q / 2;
+}
+
+求多边形面积————三角剖分
+1按照逆时针方向顺次为各边指定方向
+2对于每条边AB，累加A^B/2(叉积)
+3最后得到的结果即为多边形的面积

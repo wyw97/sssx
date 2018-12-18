@@ -47,5 +47,6 @@
      
      poj 1269 Intersecting Lines
 
+     poj 1569 MyacmTriangles
       、
       

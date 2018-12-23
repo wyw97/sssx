@@ -25,6 +25,8 @@
       
       poj 2528 Mayor's posters
       
+      poj 1151 Atlantics
+      
 4、Trie图：多模式的字符串匹配
 
 5、强连通分量

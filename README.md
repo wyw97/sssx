@@ -50,5 +50,6 @@
      poj 1269 Intersecting Lines
 
      poj 1569 MyacmTriangles
-      、
+     
+     poj 1039 Pipe、
       

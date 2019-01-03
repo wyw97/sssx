@@ -32,6 +32,8 @@
 5、强连通分量
 
      poj 2186 popular cows (有向图Tarjan算法)
+     
+     poj Going from u to v or from v to u (有向图Tarjan算法 + 拓扑排序)
 
 6、最短路
 

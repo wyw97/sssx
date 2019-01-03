@@ -1,4 +1,5 @@
 /*
+    http://dapractise.openjudge.cn/2018hwall/015/
     Tarjan算法+拓扑排序
     4104KB
     30ms
@@ -68,12 +69,14 @@ bool TopoSort()
         if(OutPut[i] == 0){
             dq.push_back(i);
             ++cnt_zero;
-            break;
+            //break;
         }
     }
+    if(cnt_zero > 1) return false;
     while(!dq.empty()){
         int top_point = dq.front();
         dq.pop_front();
+        cnt_zero = 0;
         for(int i = 1; i <= size_t; ++i){
             if(NewGraph[top_point][i] && OutPut[i] == 1){
                 dq.push_back(i);
@@ -81,8 +84,9 @@ bool TopoSort()
                 cnt_zero++;
             }
         }
+        if(cnt_zero > 1) return false;
     }
-    return size_t == cnt_zero;
+    return true;
 }
 int main()
 {

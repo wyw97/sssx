@@ -57,5 +57,7 @@
 
      poj 1569 MyacmTriangles
      
-     poj 1039 Pipe、
+     poj 1039 Pipe
+     
+     poj 1228 Grandpa's Estate(水平角法求凸包模板)
       

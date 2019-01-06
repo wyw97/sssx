@@ -40,6 +40,8 @@
 6、最短路
 
      poj 3424 Candies (Dijkstra算法优先队列模板)
+     
+     poj 1860 Currency Exchange(Bellman Ford模板题)
  
 7、网络流
 
